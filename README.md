@@ -1,4 +1,5 @@
 Tarea6
 ======
 
-Tarea 6 
+David Andres Davila
+Henry Martinez Gomez
