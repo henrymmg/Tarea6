@@ -15,8 +15,8 @@
 
 
 float *PosicionesOrbitax (int r);
-float *VelocidadesOrbitay (int r);
-float *PosicionesOrbitax (int r);
+float *VelocidadesOrbitax (int r);
+float *PosicionesOrbitay (int r);
 float *VelocidadesOrbitay (int r);
 int main (int argc, char *argv[])
 {
@@ -27,7 +27,7 @@ int main (int argc, char *argv[])
 *Salidas: -0
 */
 
-	if(argc!= 4)
+	if(argc!= 5)
 	{
 		printf ("Los argumentos de entrada deben ser: posx, posy, velx, vely, del cuerpo central");
 		exit (1);
@@ -48,11 +48,17 @@ int main (int argc, char *argv[])
 	float vxCen;
 	float vyCen;
 
-	float *Aux12;
-	float *Aux18;
-	float *Aux24;
-	float *Aux30;
-	float *Aux36;
+	float *Aux12x;
+	float *Aux18x;
+	float *Aux24x;
+	float *Aux30x;
+	float *Aux36x;
+
+	float *Aux12y;
+	float *Aux18y;
+	float *Aux24y;
+	float *Aux30y;
+	float *Aux36y;
 
 	char nombre[100]="CondicionesIniciales.txt";
 
@@ -75,16 +81,16 @@ int main (int argc, char *argv[])
 
 
 	xCentro=atof(argv[1]);
-	yCentro=atof(argv[2]);
+	yCentro=atof(argv[2]);	
 	vxCen=atof(argv[3]);
 	vyCen=atof(argv[4]);
 
 	Posix[0] = xCentro;
-	Posiy[0] = yCentro
+	Posiy[0] = yCentro;
 	Velox[0] = vxCen;
 	Veloy[0] = vyCen;
 
-	for(i=2; i<242; i++)
+	for(i=1; i<121; i++)
 	{
 		if(i<14)
 		{
@@ -134,7 +140,7 @@ int main (int argc, char *argv[])
 
 	for(j=1; j<121; j++)
 	{
-		if(i<14)
+		if(j<14)
 		{
 			Aux12x = VelocidadesOrbitax (10);
 			Aux12y = VelocidadesOrbitay (10);
@@ -161,7 +167,7 @@ int main (int argc, char *argv[])
 				}
 				else
 				{
-					if (i<86)
+					if (j<86)
 					{
 						Aux30x = VelocidadesOrbitax (40);
 						Aux30y = VelocidadesOrbitay (40);
@@ -182,9 +188,9 @@ int main (int argc, char *argv[])
 
 
 	archivo = fopen(nombre,"w");
-        for(k = 0; j < 121; j++)
+        for(k = 0; k < 121; k++)
 	{
-                fprintf(out, "%d        %f        %f        %f        %f\n", k-1, Posix[k], Posiy[k], Velox[k], Veloy[k]);
+                fprintf(archivo, "%d        %f        %f        %f        %f\n", k-1, Posix[k], Posiy[k], Velox[k], Veloy[k]);
         }
         
         fclose(archivo);
@@ -237,7 +243,7 @@ float *PosicionesOrbitax (int r)
 	Posiciones = malloc(total * sizeof(float));
 	for(i=0; i<puntos; i++)
 	{
-		posx = r*cos(2*PI*i/puntos);
+		posx = r*cos(2.0*PI*i/puntos);
 		Posiciones[i] = posx;
 	}
 	
@@ -254,8 +260,10 @@ float *VelocidadesOrbitax (int r)
 */
 	float *Velocidades;
 	float velx;
+	float Magnitud;
 	int puntos;
 	int total;
+	int i;
 	if(r == 10)
 	{
 		puntos = 12;
@@ -287,10 +295,10 @@ float *VelocidadesOrbitax (int r)
 	}
 	total = puntos;
 	Velocidades = malloc(total * sizeof(float));
-	Magnitud = sqrt(r*6.67*1.99*(10^(30)))
+	Magnitud = sqrt(r*6.67*1.99*(10^(30)));
 	for(i=0; i<puntos; i++)
 	{
-		velx = -1*Magnitud*sin(2*PI*i/puntos);
+		velx = -1.0*Magnitud*sin(2.0*PI*i/puntos);
 		Velocidades[i] = velx;
 	}
 	return Velocidades;
@@ -342,7 +350,7 @@ float *PosicionesOrbitay (int r)
 	Posiciones = malloc(total * sizeof(float));
 	for(i=0; i<puntos; i++)
 	{
-		posy = r*sin(2*PI*i/puntos);
+		posy = r*sin(2.0*PI*i/puntos);
 		Posiciones[i] = posy;
 	}
 	
@@ -359,8 +367,10 @@ float *VelocidadesOrbitay (int r)
 */
 	float *Velocidades;
 	float vely;
+	float Magnitud;
 	int puntos;
 	int total;
+	int i;
 	if(r == 10)
 	{
 		puntos = 12;
@@ -392,10 +402,10 @@ float *VelocidadesOrbitay (int r)
 	}
 	total = puntos;
 	Velocidades = malloc(total * sizeof(float));
-	Magnitud = sqrt(r*6.67*1.99*(10^(30)))
+	Magnitud = sqrt(r*6.67*1.99*(10^(30)));
 	for(i=0; i<puntos; i++)
 	{
-		vely = Magnitud*cos(2*PI*i/puntos);
+		vely = Magnitud*cos(2.0*PI*i/puntos);
 		Velocidades[i] = vely;
 	}
 	return Velocidades;

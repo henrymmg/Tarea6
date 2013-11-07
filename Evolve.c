@@ -48,8 +48,8 @@ double *Resolver (double pix, double piy, double vix, double viy)
 */
 	double *SolPos;
 	double *SolVel;
-	SolPos = malloc(15 * sizeof(float));
-	SolVel = malloc(15 * sizeof(float));
+	SolPos = malloc(5 * sizeof(float));
+	SolVel = malloc(5 * sizeof(float));
 	return SolPos, SolVel;
 
 }

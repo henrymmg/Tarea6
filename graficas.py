@@ -1,14 +1,18 @@
-def Graficas(ArchivosEntrada):
+import numpy as np
+import pylab as pl
+
+def Graficas(ArchivoEntrada):
 #Entradas: Archivos de entrada
 #Salidas: Graficas
 #Importa los archivos de ID, posiciones y velocidades
-        infiles = open('ArchivosEntrada.txt','r')    
-#Comprueba cuantos de estos se van a graficar y los grafica
-        texto = infiles.readlines()
+
+	texto=np.loadtxt("CondicionesIniciales.txt")
         if texto!='':
                 posx=texto[:,1]
-                posy=texto[:,2]
-                plot (posx,posy)
-        
-            else:
+                posy=texto[:,2]        
+		pl.scatter (posx,posy)
+		pl.show()
+	else:
                 return 0
+Graficas('CondicionesIniciales.txt')
+
